@@ -1,6 +1,6 @@
 SELECT c.customer_id, c.first_name, c.last_name, c.birth_date, COUNT(o.order_id) AS sales_count_in_january
-FROM Customer c
-JOIN [Orders] o ON c.customer_id = o.customer_id
+FROM [Orders] o
+JOIN [Customer] c ON c.customer_id = o.customer_id
 WHERE DAY(c.birth_date) = DAY(GETDATE()) AND MONTH(c.birth_date) = MONTH(GETDATE())
 GROUP BY c.customer_id, c.first_name, c.last_name, c.birth_date
 HAVING COUNT(o.order_id) > 1500 AND YEAR(MAX(o.purchase_date)) = 2020 AND MONTH(MAX(o.purchase_date)) = 1;
